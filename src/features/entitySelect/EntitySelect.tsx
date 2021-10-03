@@ -31,7 +31,6 @@ export function EntitySelect(): JSX.Element {
             onDeselect={onDeselect}
             placeholder="Select entities"
             showArrow
-            style={{width: '100%'}}
         />
     );
 }

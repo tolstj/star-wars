@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import App from './App';
 import './index.css';
-import { planetFiltersDefault } from './features/uniqueFilters/defaultFilters/planet';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -13,5 +12,3 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root'),
 );
-
-console.log(JSON.stringify(planetFiltersDefault));

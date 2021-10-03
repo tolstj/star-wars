@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import searchReducer from '../features/search/searchSlice';
 import entitySelectReducer from '../features/entitySelect/entitySelectSlice';
+import uniqueFiltersReducer from '../features/uniqueFilters/uniqueFiltersSlice';
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
     entitySelect: entitySelectReducer,
+    uniqueFilters: uniqueFiltersReducer,
   },
 });
 

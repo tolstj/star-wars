@@ -1,8 +1,10 @@
 import { Climate, climates, Terrain, terrains } from '../../../interfaces/Planet';
-import { UniqueFilter, UniqueFilterType } from '../uniqueFiltersSlice';
+import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter';
+
 import { maxAtmosphericSpeedFilter } from './common';
 
 const terrainFilter: UniqueFilter<Terrain> = {
+    id: 'terrain',
     title: 'Terrain',
     type: UniqueFilterType.Select,
     options: terrains,
@@ -10,6 +12,7 @@ const terrainFilter: UniqueFilter<Terrain> = {
 };
 
 const climateFilter: UniqueFilter<Climate> = {
+    id: 'climate',
     title: 'Climate',
     type: UniqueFilterType.Select,
     options: climates,
@@ -17,6 +20,7 @@ const climateFilter: UniqueFilter<Climate> = {
 };
 
 const rotationPeriodFilter: UniqueFilter = {
+    id: 'rotationPeriod',
     title: 'Rotation period >=',
     type: UniqueFilterType.Input,
     value: 0,

@@ -1,7 +1,8 @@
 import { EyeColor, eyeColors, Gender, genders, HairColor, hairColors } from '../../../interfaces/Character';
-import { UniqueFilter, UniqueFilterType } from '../uniqueFiltersSlice';
+import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter';
 
 const hairColorFilter: UniqueFilter<HairColor> = {
+    id: 'hairColor',
     title: 'Hair color',
     type: UniqueFilterType.Select,
     options: hairColors,
@@ -9,6 +10,7 @@ const hairColorFilter: UniqueFilter<HairColor> = {
 };
 
 const eyeColorFilter: UniqueFilter<EyeColor> = {
+    id: 'eyeColor',
     title: 'Eye color',
     type: UniqueFilterType.Select,
     options: eyeColors,
@@ -16,6 +18,7 @@ const eyeColorFilter: UniqueFilter<EyeColor> = {
 };
 
 const genderFilter: UniqueFilter<Gender> = {
+    id: 'gender',
     title: 'Gender',
     type: UniqueFilterType.Select,
     options: genders,
