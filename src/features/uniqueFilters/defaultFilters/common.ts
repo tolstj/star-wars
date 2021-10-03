@@ -1,9 +1,9 @@
 import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter';
 
 
-export const maxAtmosphericSpeedFilter: UniqueFilter = {
-    id: 'maxAtmosphericSpeed',
-    title: 'Max atmospheric speed >=',
+export const maxAtmospheringSpeedFilter: UniqueFilter = {
+    id: 'maxAtmospheringSpeed',
+    title: 'Max atmosphering speed >=',
     type: UniqueFilterType.Input,
     value: 0,
 };

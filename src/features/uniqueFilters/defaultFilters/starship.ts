@@ -1,5 +1,5 @@
 import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter';
-import { maxAtmosphericSpeedFilter } from './common';
+import { maxAtmospheringSpeedFilter } from './common';
 
 const passengersFilter: UniqueFilter = {
     id: 'passengers',
@@ -9,7 +9,7 @@ const passengersFilter: UniqueFilter = {
 }
 
 export const starshipFiltersDefault = [
-    maxAtmosphericSpeedFilter,
+    maxAtmospheringSpeedFilter,
     passengersFilter,
 ];
 

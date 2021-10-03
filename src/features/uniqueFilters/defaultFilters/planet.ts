@@ -1,7 +1,7 @@
 import { Climate, climates, Terrain, terrains } from '../../../interfaces/Planet';
 import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter';
 
-import { maxAtmosphericSpeedFilter } from './common';
+import { maxAtmospheringSpeedFilter } from './common';
 
 const terrainFilter: UniqueFilter<Terrain> = {
     id: 'terrain',
@@ -30,7 +30,7 @@ export const planetFiltersDefault = [
     terrainFilter,
     climateFilter,
     rotationPeriodFilter,
-    maxAtmosphericSpeedFilter,
+    maxAtmospheringSpeedFilter,
 ];
 
 export type PlanetFilters = typeof planetFiltersDefault;

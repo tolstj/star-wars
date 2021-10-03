@@ -1,3 +1,14 @@
+export interface Character {
+    name: string;
+    height: number;
+    mass: number;
+    hair_color: HairColor;
+    skin_color: string;
+    eye_color: EyeColor;
+    birth_year: string;
+    gender: Gender;
+}
+
 export enum HairColor {
     Black = 'Black',
     Blonde = 'Blonde',
