@@ -1,8 +1,10 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select, Typography } from 'antd';
 import { Entity } from '../../interfaces/Entity';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { added, removed, selectEntities } from './entitySelectSlice';
+
+const { Title } = Typography;
 
 const options = [
     { value: Entity.Character },
@@ -23,14 +25,16 @@ export function EntitySelect(): JSX.Element {
     };
 
     return (
-        <Select
-            mode="multiple"
-            options={options}
-            value={entities}
-            onSelect={onSelect}
-            onDeselect={onDeselect}
-            placeholder="Select entities"
-            showArrow
-        />
+        <>
+            <Title level={5}>Select entities</Title>
+            <Select
+                mode="multiple"
+                options={options}
+                value={entities}
+                onSelect={onSelect}
+                onDeselect={onDeselect}
+                showArrow
+            />
+        </>
     );
 }

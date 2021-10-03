@@ -57,7 +57,7 @@ export const uniqueFiltersSlice = createSlice({
             }
         },
     },
-})
+});
 
 export const { initFilters, typeInputChanged, typeSelectAdded, typeSelectRemoved } = uniqueFiltersSlice.actions;
 

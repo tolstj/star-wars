@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
-import { InputNumber, Select } from 'antd';
+import { InputNumber, Select, Typography } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectEntities } from '../entitySelect/entitySelectSlice';
 import { initFilters, selectUniqueFilters, typeInputChanged, typeSelectAdded, typeSelectRemoved } from './uniqueFiltersSlice';
 import { UniqueFilterType } from '../../interfaces/UniqueFilter';
+
+const { Title } = Typography;
 
 export function UniqueFilters(): JSX.Element {
     const entities = useAppSelector(selectEntities);
@@ -52,25 +54,32 @@ export function UniqueFilters(): JSX.Element {
             uniqueFilters.map((uniqueFilter) => {
                 if (uniqueFilter.type === UniqueFilterType.Input) {
                     return (
-                        <InputNumber
-                            min={0}
-                            value={uniqueFilter.value}
-                            onChange={(newValue) => onChange(uniqueFilter.id, newValue)}
-                            key={uniqueFilter.id}
-                        />
+                        <>
+                            <Title level={5}>{uniqueFilter.title}</Title>
+                            <InputNumber
+                                min={0}
+                                value={uniqueFilter.value}
+                                onChange={(newValue) => onChange(uniqueFilter.id, newValue)}
+                                key={uniqueFilter.id}
+                            />
+                        </>
                     );
                 } else if (uniqueFilter.type === UniqueFilterType.Select) {
                     return (
-                        <Select
-                            mode="multiple"
-                            options={uniqueFilter.options!.map((option: any) => ({
-                                value: option
-                            }))}
-                            value={uniqueFilter.value}
-                            onSelect={(filterValue) => onSelect(uniqueFilter.id, filterValue)}
-                            onDeselect={(filterValue) => onDeselect(uniqueFilter.id, filterValue)}
-                            key={uniqueFilter.id}
-                        />
+                        <>
+                            <Title level={5}>{uniqueFilter.title}</Title>
+                            <Select
+                                mode="multiple"
+                                options={uniqueFilter.options!.map((option: any) => ({
+                                    value: option
+                                }))}
+                                value={uniqueFilter.value}
+                                onSelect={(filterValue) => onSelect(uniqueFilter.id, filterValue)}
+                                onDeselect={(filterValue) => onDeselect(uniqueFilter.id, filterValue)}
+                                showArrow
+                                key={uniqueFilter.id}
+                            />
+                        </>
                     );
                 } else {
                     return 'Unknown type of filter';
