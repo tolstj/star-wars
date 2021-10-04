@@ -2,11 +2,11 @@ export interface Character {
     name: string;
     height: string;
     mass: string;
-    hair_color: HairColor;
+    hair_color: HairColor | 'n/a' | 'none' | 'no hair =(';
     skin_color: string;
     eye_color: EyeColor;
     birth_year: string;
-    gender: Gender;
+    gender: Gender | 'n/a' | 'robot';
     url: string;
 }
 

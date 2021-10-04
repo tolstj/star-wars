@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { List, Typography, Row, Col } from 'antd';
+
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LoadingStatus, toggledEntity, selectError, selectLoadingStatus, selectSelectedEntity } from './entitiesListSlice';
 import { fetchEntities } from './fetch';
 import { selectFilteredEntities } from './selectFilteredEntities';
 import { Entity } from '../../interfaces/Entity';
-import { excludeUnnecessaryFields, getEntityId, isCharacter, isPlanet, isStarship } from './utils';
-import { IMAGE_BASE_URL } from './api/api';
+import { excludeUnnecessaryFields } from './utils';
 import { EntityImage } from './EntityImage';
 
 const { Title } = Typography;

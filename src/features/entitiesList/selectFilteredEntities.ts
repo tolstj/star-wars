@@ -1,6 +1,7 @@
 import { RootState } from '../../app/store';
 import { Entity, EntityType } from '../../interfaces/Entity';
 import { UniqueFilterType } from '../../interfaces/UniqueFilter';
+import { isPlanet } from './utils';
 
 export const selectFilteredEntities = (state: RootState): Entity[] => {
     let filteredEntities: Entity[] = [];
@@ -37,10 +38,16 @@ export const selectFilteredEntities = (state: RootState): Entity[] => {
                         return entity[uniqueFilter.field] >= uniqueFilter.value;
                     }
                     // @ts-ignore
-                    return uniqueFilter.value.some((selectUniqueFilter) =>
+                    return uniqueFilter.value.some((selectUniqueFilter) => {
+                        if (isPlanet(entity) && uniqueFilter.field === 'terrain') {
+                            // @ts-ignore
+                            return entity[uniqueFilter.field].split(', ').some((terrain) => (
+                                terrain === selectUniqueFilter
+                            ));
+                        }
                         // @ts-ignore 
-                        selectUniqueFilter === entity[uniqueFilter.field]
-                    );
+                        return selectUniqueFilter === entity[uniqueFilter.field]
+                    });
                 });
             })
         }
