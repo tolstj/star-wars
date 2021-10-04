@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { Character } from '../../interfaces/Character';
-import { EntityType } from '../../interfaces/Entity';
 import { Planet } from '../../interfaces/Planet';
 import { Starship } from '../../interfaces/Starship';
+import { fetchEntities } from './fetch';
 
-enum LoadingStatus {
+export enum LoadingStatus {
     idle,
     loading,
-    fulfilled,
-    error,
+    succeeded,
+    failed,
 }
 
 interface InitialState {
@@ -17,7 +17,7 @@ interface InitialState {
     planets: Planet[];
     starships: Starship[];
     loadingStatus: LoadingStatus;
-    error: null | Error;
+    error?: string;
 }
 
 const initialState: InitialState = {
@@ -25,13 +25,30 @@ const initialState: InitialState = {
     planets: [],
     starships: [],
     loadingStatus: LoadingStatus.idle,
-    error: null,
 };
 
 export const entitiesListSlice = createSlice({
     name: 'entitiesList',
     initialState,
     reducers: {},
+    extraReducers(builder) {
+        builder
+            .addCase(fetchEntities.pending, (state, action) => {
+                state.loadingStatus = LoadingStatus.loading;
+            })
+            .addCase(fetchEntities.fulfilled, (state, action) => {
+                state.loadingStatus = LoadingStatus.succeeded;
+                state.characters = action.payload.characters;
+                state.planets = action.payload.planets;
+                state.starships = action.payload.starships;
+            })
+            .addCase(fetchEntities.rejected, (state, action) => {
+                state.loadingStatus = LoadingStatus.failed;
+                state.error = action.error.message;
+            });
+    },
 });
+
+export const selectLoadingStatus = (state: RootState) => state.entitiesList.loadingStatus;
 
 export default entitiesListSlice.reducer;
