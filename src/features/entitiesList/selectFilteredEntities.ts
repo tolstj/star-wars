@@ -24,7 +24,7 @@ export const selectFilteredEntities = (state: RootState): Entity[] => {
         const searchQuery = state.search;
         if (searchQuery) {
             filteredEntities = filteredEntities.filter(
-                ({ name }: Entity) => name.toLowerCase().includes(searchQuery)
+                ({ name }: Entity) => name.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
 
