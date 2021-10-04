@@ -37,23 +37,28 @@ export const selectFilteredEntities = (state: RootState): Entity[] => {
                         // @ts-ignore
                         return entity[uniqueFilter.field] >= uniqueFilter.value;
                     }
-                    // @ts-ignore
-                    return uniqueFilter.value.some((selectUniqueFilter) => {
-                        if (isPlanet(entity) && uniqueFilter.field === 'terrain') {
-                            // @ts-ignore
-                            return entity[uniqueFilter.field].split(', ').some((terrain) => (
-                                terrain === selectUniqueFilter
-                            ));
-                        }
-                        if (isCharacter(entity) && uniqueFilter.field === 'hair_color') {
-                            // @ts-ignore
-                            return entity[uniqueFilter.field].split(', ').some((hairColor) => (
-                                hairColor === selectUniqueFilter
-                            ));
-                        }
-                        // @ts-ignore 
-                        return selectUniqueFilter === entity[uniqueFilter.field]
-                    });
+
+                    if (uniqueFilter.value.length) {
+                        // @ts-ignore
+                        return uniqueFilter.value.some((selectUniqueFilter) => {
+                            if (isPlanet(entity) && uniqueFilter.field === 'terrain') {
+                                // @ts-ignore
+                                return entity[uniqueFilter.field].split(', ').some((terrain) => (
+                                    terrain === selectUniqueFilter
+                                ));
+                            }
+                            if (isCharacter(entity) && uniqueFilter.field === 'hair_color') {
+                                // @ts-ignore
+                                return entity[uniqueFilter.field].split(', ').some((hairColor) => (
+                                    hairColor === selectUniqueFilter
+                                ));
+                            }
+                            // @ts-ignore 
+                            return selectUniqueFilter === entity[uniqueFilter.field]
+                        });
+                    } else {
+                        return true;
+                    }
                 });
             })
         }
