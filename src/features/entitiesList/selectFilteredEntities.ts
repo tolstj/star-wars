@@ -37,7 +37,10 @@ export const selectFilteredEntities = (state: RootState): Entity[] => {
                         return entity[uniqueFilter.field] >= uniqueFilter.value;
                     }
                     // @ts-ignore
-                    return entity[uniqueFilter.field] === uniqueFilter.value;
+                    return uniqueFilter.value.some((selectUniqueFilter) =>
+                        // @ts-ignore 
+                        selectUniqueFilter === entity[uniqueFilter.field]
+                    );
                 });
             })
         }
