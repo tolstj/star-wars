@@ -50,5 +50,6 @@ export const entitiesListSlice = createSlice({
 });
 
 export const selectLoadingStatus = (state: RootState) => state.entitiesList.loadingStatus;
+export const selectError = (state: RootState) => state.entitiesList.error;
 
 export default entitiesListSlice.reducer;

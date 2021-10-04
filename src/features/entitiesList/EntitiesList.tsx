@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { List } from 'antd';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { LoadingStatus, selectLoadingStatus } from './entitiesListSlice';
+import { LoadingStatus, selectError, selectLoadingStatus } from './entitiesListSlice';
 import { fetchEntities } from './fetch';
 import { selectFilteredEntities } from './selectFilteredEntities';
 
 export function EntitiesList(): JSX.Element {
     const loadingStatus = useAppSelector(selectLoadingStatus);
+    const error = useAppSelector(selectError);
     const filteredEntitiesList = useAppSelector(selectFilteredEntities);
     const dispatch = useAppDispatch();
-
-    const entityNames = filteredEntitiesList.map(({ name }) => name);
 
     useEffect(() => {
         if (loadingStatus === LoadingStatus.idle) {
@@ -24,14 +23,15 @@ export function EntitiesList(): JSX.Element {
             {loadingStatus === LoadingStatus.succeeded && (
                 <List
                     bordered
-                    dataSource={entityNames}
-                    renderItem={item => (
+                    dataSource={filteredEntitiesList}
+                    renderItem={entity => (
                         <List.Item>
-                            {item}
+                            {entity.name}
                         </List.Item>
                     )}
                 />
             )}
+            {loadingStatus === LoadingStatus.failed && error}
         </div>
     );
 }
