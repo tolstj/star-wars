@@ -7,6 +7,7 @@ import { selectFilteredEntities } from './selectFilteredEntities';
 import { Entity } from '../../interfaces/Entity';
 import { excludeUnnecessaryFields, getEntityId, isCharacter, isPlanet, isStarship } from './utils';
 import { IMAGE_BASE_URL } from './api/api';
+import { EntityImage } from './EntityImage';
 
 const { Title } = Typography;
 
@@ -49,15 +50,7 @@ export function EntitiesList(): JSX.Element {
 
             {selectedEntity ? (
                 <Col span={4}>
-                    {isCharacter(selectedEntity) && (
-                        <img src={`${IMAGE_BASE_URL}/characters/${getEntityId(selectedEntity)}.jpg`} alt="" />
-                    )}
-                    {isPlanet(selectedEntity) && (
-                        <img src={`${IMAGE_BASE_URL}/planets/${getEntityId(selectedEntity)}.jpg`} alt="" />
-                    )}
-                    {isStarship(selectedEntity) && (
-                        <img src={`${IMAGE_BASE_URL}/starships/${getEntityId(selectedEntity)}.jpg`} alt="" />
-                    )}
+                    <EntityImage selectedEntity={selectedEntity} />
 
                     <Title>{selectedEntity.name}</Title>
 
