@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { InputNumber, Select, Typography } from 'antd';
+import { InputNumber, Select, Typography, Row, Col } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectEntityTypes } from '../entitySelect/entitySelectSlice';
@@ -49,23 +49,23 @@ export function UniqueFilters(): JSX.Element {
     }, [dispatch, entityTypes]);
 
     return (
-        <div>
+        <Row justify="center" style={{ marginTop: '50px' }}>
             {// @ts-ignore
             uniqueFilters.map((uniqueFilter) => {
                 if (uniqueFilter.type === UniqueFilterType.Input) {
                     return (
-                        <div key={uniqueFilter.field}>
+                        <Col span={4} key={uniqueFilter.field}>
                             <Title level={5}>{uniqueFilter.title}</Title>
                             <InputNumber
                                 min={0}
                                 value={uniqueFilter.value}
                                 onChange={(newValue) => onChange(uniqueFilter.field, newValue)}
                             />
-                        </div>
+                        </Col>
                     );
                 } else if (uniqueFilter.type === UniqueFilterType.Select) {
                     return (
-                        <div key={uniqueFilter.field}>
+                        <Col span={4} key={uniqueFilter.field}>
                             <Title level={5}>{uniqueFilter.title}</Title>
                             <Select
                                 mode="multiple"
@@ -77,12 +77,12 @@ export function UniqueFilters(): JSX.Element {
                                 onDeselect={(filterValue) => onDeselect(uniqueFilter.field, filterValue)}
                                 showArrow
                             />
-                        </div>
+                        </Col>
                     );
                 } else {
                     return 'Unknown type of filter';
                 }
             })}
-        </div>
+        </Row>
     );
 }

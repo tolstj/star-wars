@@ -1,4 +1,5 @@
 import React from 'react';
+import { Row, Col } from 'antd';
 
 import { Search } from './features/search/Search';
 import { EntitySelect } from './features/entitySelect/EntitySelect';
@@ -9,10 +10,19 @@ import './App.css';
 function App() {
   return (
     <div className="app">
-        <Search />
-        <EntitySelect />
+        <Row justify="center" align="bottom">
+            <Col span={4}><Search /></Col>
+            <Col span={4} />
+            <Col span={4}><EntitySelect /></Col>
+        </Row>
+
         <UniqueFilters />
-        <EntitiesList />
+
+        <Row justify="center" style={{ marginTop: '50px' }}>
+            <Col span={4}><EntitiesList /></Col>
+            <Col span={4} />
+            <Col span={4} />
+        </Row>
     </div>
   );
 }
