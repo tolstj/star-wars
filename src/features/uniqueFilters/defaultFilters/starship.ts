@@ -2,7 +2,7 @@ import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter
 import { maxAtmospheringSpeedFilter } from './common';
 
 const passengersFilter: UniqueFilter = {
-    id: 'passengers',
+    field: 'passengers',
     title: 'Passengers >=',
     type: UniqueFilterType.Input,
     value: 0,

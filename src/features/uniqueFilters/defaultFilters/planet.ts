@@ -4,7 +4,7 @@ import { UniqueFilter, UniqueFilterType } from '../../../interfaces/UniqueFilter
 import { maxAtmospheringSpeedFilter } from './common';
 
 const terrainFilter: UniqueFilter<Terrain> = {
-    id: 'terrain',
+    field: 'terrain',
     title: 'Terrain',
     type: UniqueFilterType.Select,
     options: terrains,
@@ -12,7 +12,7 @@ const terrainFilter: UniqueFilter<Terrain> = {
 };
 
 const climateFilter: UniqueFilter<Climate> = {
-    id: 'climate',
+    field: 'climate',
     title: 'Climate',
     type: UniqueFilterType.Select,
     options: climates,
@@ -20,7 +20,7 @@ const climateFilter: UniqueFilter<Climate> = {
 };
 
 const rotationPeriodFilter: UniqueFilter = {
-    id: 'rotationPeriod',
+    field: 'rotationPeriod',
     title: 'Rotation period >=',
     type: UniqueFilterType.Input,
     value: 0,

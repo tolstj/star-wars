@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { Entity } from '../../interfaces/Entity';
+import { EntityType } from '../../interfaces/Entity';
 
-const initialState: Entity[] = [
-    Entity.Character,
-    Entity.Planet,
-    Entity.Starship,
+const initialState: EntityType[] = [
+    EntityType.Character,
+    EntityType.Planet,
+    EntityType.Starship,
 ];
 
 export const entitySelectSlice = createSlice({
     name: 'entitySelect',
     initialState,
     reducers: {
-        added: (state, action: PayloadAction<Entity>) => {
+        added: (state, action: PayloadAction<EntityType>) => {
             state.push(action.payload);
         },
-        removed: (state, action: PayloadAction<Entity>) => {
+        removed: (state, action: PayloadAction<EntityType>) => {
             return state.filter((entity) => entity !== action.payload);
         },
     },
@@ -23,6 +23,6 @@ export const entitySelectSlice = createSlice({
 
 export const { added, removed } = entitySelectSlice.actions;
 
-export const selectEntities = (state: RootState) => state.entitySelect;
+export const selectEntityTypes = (state: RootState) => state.entitySelect;
 
 export default entitySelectSlice.reducer;

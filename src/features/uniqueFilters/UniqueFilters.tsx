@@ -2,51 +2,51 @@ import React, { useEffect } from 'react';
 import { InputNumber, Select, Typography } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { selectEntities } from '../entitySelect/entitySelectSlice';
+import { selectEntityTypes } from '../entitySelect/entitySelectSlice';
 import { initFilters, selectUniqueFilters, typeInputChanged, typeSelectAdded, typeSelectRemoved } from './uniqueFiltersSlice';
 import { UniqueFilterType } from '../../interfaces/UniqueFilter';
 
 const { Title } = Typography;
 
 export function UniqueFilters(): JSX.Element {
-    const entities = useAppSelector(selectEntities);
+    const entityTypes = useAppSelector(selectEntityTypes);
     const uniqueFilters = useAppSelector(selectUniqueFilters);
     const dispatch = useAppDispatch();
 
-    const onChange = (id: string, newValue: string | number) => {
+    const onChange = (field: string, newValue: string | number) => {
         dispatch(typeInputChanged(
             {
-                id,
+                field,
                 value: Number(newValue),
             }
         ));
     }
 
-    const onSelect = (id: string, filterValue: any) => {
+    const onSelect = (field: string, filterValue: any) => {
         dispatch(typeSelectAdded(
             {
-                id,
+                field,
                 value: filterValue,
             }
         ))
     }
 
-    const onDeselect = (id: string, filterValue: any) => {
+    const onDeselect = (field: string, filterValue: any) => {
         dispatch(typeSelectRemoved(
             {
-                id,
+                field,
                 value: filterValue,
             }
         ))
     }
 
     useEffect(() => {
-        if (entities.length === 1) {
-            dispatch(initFilters(entities[0]));
+        if (entityTypes.length === 1) {
+            dispatch(initFilters(entityTypes[0]));
         } else {
             dispatch(initFilters(null));
         }
-    }, [dispatch, entities]);
+    }, [dispatch, entityTypes]);
 
     return (
         <div>
@@ -54,19 +54,18 @@ export function UniqueFilters(): JSX.Element {
             uniqueFilters.map((uniqueFilter) => {
                 if (uniqueFilter.type === UniqueFilterType.Input) {
                     return (
-                        <>
+                        <div key={uniqueFilter.field}>
                             <Title level={5}>{uniqueFilter.title}</Title>
                             <InputNumber
                                 min={0}
                                 value={uniqueFilter.value}
-                                onChange={(newValue) => onChange(uniqueFilter.id, newValue)}
-                                key={uniqueFilter.id}
+                                onChange={(newValue) => onChange(uniqueFilter.field, newValue)}
                             />
-                        </>
+                        </div>
                     );
                 } else if (uniqueFilter.type === UniqueFilterType.Select) {
                     return (
-                        <>
+                        <div key={uniqueFilter.field}>
                             <Title level={5}>{uniqueFilter.title}</Title>
                             <Select
                                 mode="multiple"
@@ -74,12 +73,11 @@ export function UniqueFilters(): JSX.Element {
                                     value: option
                                 }))}
                                 value={uniqueFilter.value}
-                                onSelect={(filterValue) => onSelect(uniqueFilter.id, filterValue)}
-                                onDeselect={(filterValue) => onDeselect(uniqueFilter.id, filterValue)}
+                                onSelect={(filterValue) => onSelect(uniqueFilter.field, filterValue)}
+                                onDeselect={(filterValue) => onDeselect(uniqueFilter.field, filterValue)}
                                 showArrow
-                                key={uniqueFilter.id}
                             />
-                        </>
+                        </div>
                     );
                 } else {
                     return 'Unknown type of filter';

@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { EyeColor, Gender, HairColor } from '../../interfaces/Character';
-import { Entity } from '../../interfaces/Entity';
+import { EntityType } from '../../interfaces/Entity';
 import { Climate, Terrain } from '../../interfaces/Planet';
 import { CharacterFilters, characterFiltersDefault } from './defaultFilters/character';
 import { PlanetFilters, planetFiltersDefault } from './defaultFilters/planet';
 import { StarshipFilters, starshipFiltersDefault } from './defaultFilters/starship';
 
 interface InputChange {
-    id: string;
+    field: string;
     value: number;
 }
 
 interface SelectChange {
-    id: string;
+    field: string;
     value: HairColor | EyeColor | Gender | Terrain | Climate;
 }
 
@@ -23,13 +23,13 @@ export const uniqueFiltersSlice = createSlice({
     name: 'uniqueFilters',
     initialState,
     reducers: {
-        initFilters: (state, action: PayloadAction<Entity | null>) => {
+        initFilters: (state, action: PayloadAction<EntityType | null>) => {
             switch (action.payload) {
-                case Entity.Character:
+                case EntityType.Character:
                     return characterFiltersDefault;
-                case Entity.Planet:
+                case EntityType.Planet:
                     return planetFiltersDefault;
-                case Entity.Starship:
+                case EntityType.Starship:
                     return starshipFiltersDefault;
                 default:
                     return [];
@@ -37,21 +37,21 @@ export const uniqueFiltersSlice = createSlice({
         },
         typeInputChanged: (state, action: PayloadAction<InputChange>) => {
             // @ts-ignore
-            const foundFilter = state.find(({ id }) => id === action.payload.id);
+            const foundFilter = state.find(({ field }) => field === action.payload.field);
             if (foundFilter) {
                 foundFilter.value = action.payload.value;
             }
         },
         typeSelectAdded: (state, action: PayloadAction<SelectChange>) => {
             // @ts-ignore
-            const foundFilter = state.find(({ id }) => id === action.payload.id);
+            const foundFilter = state.find(({ field }) => field === action.payload.field);
             if (foundFilter) {
                 foundFilter.value.push(action.payload.value);
             }
         },
         typeSelectRemoved: (state, action: PayloadAction<SelectChange>) => {
             // @ts-ignore
-            const foundFilter = state.find(({ id }) => id === action.payload.id);
+            const foundFilter = state.find(({ field }) => field === action.payload.field);
             if (foundFilter) {
                 foundFilter.value = foundFilter.value.filter((filterValue: any) => filterValue !== action.payload.value);
             }

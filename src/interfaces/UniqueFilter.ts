@@ -5,7 +5,7 @@ export enum UniqueFilterType {
 
 // OptionType is void when type === UniqueFilterType.Input
 export interface UniqueFilter<OptionType = void> {
-    id: string;
+    field: string;
     title: string;
     type: UniqueFilterType;
     options?: OptionType[];

@@ -1,27 +1,27 @@
 import React from 'react';
 import { Select, Typography } from 'antd';
-import { Entity } from '../../interfaces/Entity';
+import { EntityType } from '../../interfaces/Entity';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { added, removed, selectEntities } from './entitySelectSlice';
+import { added, removed, selectEntityTypes } from './entitySelectSlice';
 
 const { Title } = Typography;
 
 const options = [
-    { value: Entity.Character },
-    { value: Entity.Planet },
-    { value: Entity.Starship },
+    { value: EntityType.Character },
+    { value: EntityType.Planet },
+    { value: EntityType.Starship },
 ];
 
 export function EntitySelect(): JSX.Element {
-    const entities = useAppSelector(selectEntities);
+    const entityTypes = useAppSelector(selectEntityTypes);
     const dispatch = useAppDispatch();
 
-    const onSelect = (entity: Entity) => {
-        dispatch(added(entity));
+    const onSelect = (entityType: EntityType) => {
+        dispatch(added(entityType));
     };
 
-    const onDeselect = (entity: Entity) => {
-        dispatch(removed(entity));
+    const onDeselect = (entityType: EntityType) => {
+        dispatch(removed(entityType));
     };
 
     return (
@@ -30,7 +30,7 @@ export function EntitySelect(): JSX.Element {
             <Select
                 mode="multiple"
                 options={options}
-                value={entities}
+                value={entityTypes}
                 onSelect={onSelect}
                 onDeselect={onDeselect}
                 showArrow
