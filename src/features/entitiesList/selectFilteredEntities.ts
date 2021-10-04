@@ -1,7 +1,7 @@
 import { RootState } from '../../app/store';
 import { Entity, EntityType } from '../../interfaces/Entity';
 import { UniqueFilterType } from '../../interfaces/UniqueFilter';
-import { isPlanet } from './utils';
+import { isCharacter, isPlanet } from './utils';
 
 export const selectFilteredEntities = (state: RootState): Entity[] => {
     let filteredEntities: Entity[] = [];
@@ -43,6 +43,12 @@ export const selectFilteredEntities = (state: RootState): Entity[] => {
                             // @ts-ignore
                             return entity[uniqueFilter.field].split(', ').some((terrain) => (
                                 terrain === selectUniqueFilter
+                            ));
+                        }
+                        if (isCharacter(entity) && uniqueFilter.field === 'hair_color') {
+                            // @ts-ignore
+                            return entity[uniqueFilter.field].split(', ').some((hairColor) => (
+                                hairColor === selectUniqueFilter
                             ));
                         }
                         // @ts-ignore 
