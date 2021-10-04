@@ -7,11 +7,12 @@ export interface Character {
     eye_color: EyeColor;
     birth_year: string;
     gender: Gender;
+    url: string;
 }
 
 export enum HairColor {
     Black = 'black',
-    Blonde = 'blonde',
+    Blonde = 'blond',
     Brown = 'brown',
     Grey = 'grey',
 }

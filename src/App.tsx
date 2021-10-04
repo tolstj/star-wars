@@ -10,7 +10,7 @@ import './App.css';
 function App() {
   return (
     <div className="app">
-        <Row justify="center" align="bottom">
+        <Row justify="center" align="bottom" style={{ marginTop: '50px' }}>
             <Col span={4}><Search /></Col>
             <Col span={4} />
             <Col span={4}><EntitySelect /></Col>
@@ -18,11 +18,7 @@ function App() {
 
         <UniqueFilters />
 
-        <Row justify="center" style={{ marginTop: '50px' }}>
-            <Col span={4}><EntitiesList /></Col>
-            <Col span={4} />
-            <Col span={4} />
-        </Row>
+        <EntitiesList />
     </div>
   );
 }

@@ -8,6 +8,7 @@ export interface Planet {
     terrain: Terrain;
     surface_water: string;
     population: string;
+    url: string;
 }
 
 export enum Terrain {

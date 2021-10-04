@@ -12,4 +12,5 @@ export interface Starship {
     hyperdrive_rating: string;
     MGLT: string;
     starship_class: string;
+    url: string;
 }
